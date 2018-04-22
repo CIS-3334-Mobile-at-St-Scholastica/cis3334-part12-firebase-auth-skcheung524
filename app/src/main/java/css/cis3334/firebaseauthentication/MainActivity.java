@@ -28,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonSignOut;
     private FirebaseAuth mAuth;
 
+
+    /**
+     * Method invoked when MainActivity is created. Responsible for initializing class attributes
+     * and setting onClickListeners for buttons
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +80,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Creates an account for the email and password combination
+     * This is done by using the instance of mAuth created during creation and calling it
+     * CreateUserWithEmailAndPassword() method
+     * @param email String email for user
+     * @param password String password for user
+     */
     private void createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -97,6 +110,13 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+
+    /**
+     * Uses existing email password combination to sign in using mAuth.signInWithEmailAndPassword
+     * Requires user to exist in order to be successful
+     * @param email
+     * @param password
+     */
     private void signIn(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -129,6 +149,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Method that executes after onCreate()
+     * This ensures that mAuth will have been instantiated before this method and its members
+     */
     @Override
     public void onStart() {
         super.onStart();
